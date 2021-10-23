@@ -119,14 +119,8 @@ async function listProcesses(): Promise<SystemStats> {
   const usefulDataIndex = result.stdout.lastIndexOf("Processes:");
   const out = result.stdout.substr(usefulDataIndex);
 
-  console.log(out.substr(0, 100));
-
   const cpu = cpuRe.exec(out);
-  console.log("cpu", cpu?.[1], cpu?.[2], cpu?.[3]);
-
   const mem = memRe.exec(out);
-  console.log("mem", mem?.[1], mem?.[2], mem?.[3]);
-
   const processes = out.matchAll(processRe);
 
   const processList: Process[] = [];
