@@ -113,7 +113,9 @@ type SystemStats = {
 };
 
 async function listProcesses(): Promise<SystemStats> {
+  // We have to run top with -l 2 to get real CPU usage (to compare samples)
   const result = await execP("top -l 2 ");
+  // We throw away the first set of data with incorrect CPU usage
   const usefulDataIndex = result.stdout.lastIndexOf("Processes:");
   const out = result.stdout.substr(usefulDataIndex);
 
@@ -126,7 +128,10 @@ async function listProcesses(): Promise<SystemStats> {
   console.log("mem", mem?.[1], mem?.[2], mem?.[3]);
 
   const processes = out.matchAll(processRe);
+
   const processList: Process[] = [];
+
+  // TODO: re-write this map-reduce style
   let count = 0;
   for (const p of processes) {
     if (count > MAX_LIST_SIZE) break;
@@ -140,6 +145,7 @@ async function listProcesses(): Promise<SystemStats> {
     count++;
   }
 
+  // Probably want some options for sorting by memory vs CPU eventually?
   processList.sort((a, b) => {
     return Number(b.cpuPercentage) - Number(a.cpuPercentage);
   });
