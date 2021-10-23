@@ -4,6 +4,7 @@
   "description": "See active processes with CPU and memory usage, kill processes.",
   "icon": "command-icon.png",
   "author": "bfollington",
+  "repository": "https://github.com/bfollington/raycast-process-list",
   "license": "MIT",
   "commands": [
     {
