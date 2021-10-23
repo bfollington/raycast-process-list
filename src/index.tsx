@@ -5,7 +5,7 @@ import util from "util";
 
 const execP = util.promisify(exec);
 
-export default function ArticleList() {
+export default function ProcessList() {
   const [output, setOutput] = useState<SystemStats | null>(null);
   const [search, setSearch] = useState<string>("");
 
