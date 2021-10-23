@@ -20,7 +20,8 @@ export default function ProcessList() {
       const out = await listProcesses();
       setOutput(out);
 
-      // cpuToast.style = ToastStyle.Success;
+      // Can't work out how to make this "sticky" without leaving it on ToastStyle.Animated
+      cpuToast.style = ToastStyle.Success;
       cpuToast.message = `CPU user: ${out.cpu.userPercentage}% sys: ${out.cpu.systemPercentage}%\nMemory ${out.memory.unusedMemory} free`;
     }
 
